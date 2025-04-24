@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "trivium_python_sdk"
-version = "1.0.0"
+version = "0.2.7"
 description = "trivium-cash"
 authors = ["OpenAPI Generator Community <team@openapitools.org>"]
 license = "NoLicense"
