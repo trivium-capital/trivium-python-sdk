@@ -1,1 +1,2 @@
-openapi-generator generate -i docs.yaml -g python --additional-properties=packageName=trivium_python_sdk
+API_VERSION=$(cat docs.yaml | grep 'version: *' | cut -f2- -d:)
+openapi-generator generate -i docs.yaml -g python --additional-properties=packageName=trivium_python_sdk --additional-properties=packageVersion=$(echo $API_VERSION)
