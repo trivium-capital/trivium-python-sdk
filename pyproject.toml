@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "trivium_python_sdk"
 version = "0.2.7"
-description = "trivium-cash"
-authors = ["OpenAPI Generator Community <team@openapitools.org>"]
-license = "NoLicense"
+description = "trivium-python-sdk"
+authors = ["William Haw <william@triviumcapital.tech>"]
+license = "MIT"
 readme = "README.md"
-repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
-keywords = ["OpenAPI", "OpenAPI-Generator", "trivium-cash"]
+repository = "https://github.com/trivium-capital/trivium-python-sdk"
+keywords = ["OpenAPI", "OpenAPI-Generator", "trivium-python-sdk"]
 include = ["trivium_python_sdk/py.typed"]
 
 [tool.poetry.dependencies]
