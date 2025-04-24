@@ -22,11 +22,19 @@ Using venv on MacOs
 
    `env/bin/pip3.10 install -r requirements.txt -r test-requirements.txt`
 
-6. Install dependencies to package for PyPi:
+6. Install dependencies to package and upload to PyPi:
 
-   `env/bin/pip3.10 install build`
+   `env/bin/pip3.10 install build twine`
 
-7. To switch back to host Python:
+7. Build package for PyPi (generates files in [dist/]() folder):
+
+   `env/bin/python3.10 -m build`
+
+8. To upload package (uploads **all** files in [dist/]()):
+
+   `env/bin/python3.10 -m twine upload dist/*`
+
+8. To switch back to host Python:
 
    `deactivate`
 
