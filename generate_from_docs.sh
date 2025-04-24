@@ -1,0 +1,1 @@
+openapi-generator generate -i docs.yaml -g python --additional-properties=packageName=trivium_python_sdk
