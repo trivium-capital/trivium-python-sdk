@@ -199,4 +199,3 @@ trivium_python_sdk/models/user_details.py
 trivium_python_sdk/models/user_status.py
 trivium_python_sdk/models/user_transaction.py
 trivium_python_sdk/py.typed
-trivium_python_sdk/rest.py

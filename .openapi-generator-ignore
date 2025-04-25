@@ -26,3 +26,5 @@
 .gitlab-ci.yml
 .travis.yml
 git_push.sh
+# remove ca_cert_data parameter that is incompatible with urllib3 1.26.x
+trivium_python_sdk/rest.py
