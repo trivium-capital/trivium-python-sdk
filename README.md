@@ -36,8 +36,8 @@ import os
 # Defining the host is optional and defaults to http://localhost
 # See configuration.py for a list of all supported configuration parameters.
 configuration = trivium_python_sdk.Configuration(
-    host = "https://staging.api.triviumcapital.tech/" # staging
-    # host = "https://production.api.triviumcapital.tech/" # production
+    host = "https://staging.api.triviumcapital.tech" # staging
+    # host = "https://production.api.triviumcapital.tech" # production
     api_key={"apiKeyAuth": os.environ["TRIVIUM_API_KEY"]}
     access_token = os.environ["TRIVIUM_API_SECRET"]
 )
