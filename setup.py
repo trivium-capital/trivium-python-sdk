@@ -22,7 +22,7 @@ from pathlib import Path
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "trivium-python-sdk"
-VERSION = "0.2.7dev3"
+VERSION = "0.2.7dev4"
 PYTHON_REQUIRES = ">= 3.8"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 3.0.0",
