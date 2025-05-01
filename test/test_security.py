@@ -1,4 +1,5 @@
 import datetime
+from dateutil.parser import isoparse
 import unittest
 
 from trivium_python_sdk.security import verify_trivium_callback_request
@@ -20,7 +21,7 @@ class TestSecurity(unittest.TestCase):
             raw_webhook_request_body=raw_body,
             timestamp_from_header=timestamp,
             public_key_base64_encoded=public_key,
-            now=datetime.datetime.fromisoformat(timestamp)
+            now=isoparse(timestamp)
         ) == True
 
     def test_security_multiple_signatures(self):
@@ -37,7 +38,7 @@ class TestSecurity(unittest.TestCase):
             raw_webhook_request_body=raw_body,
             timestamp_from_header=timestamp,
             public_key_base64_encoded=public_key,
-            now=datetime.datetime.fromisoformat(timestamp)
+            now=isoparse(timestamp)
         ) == True
 
     def test_security_expired_timestamp(self):
@@ -47,7 +48,7 @@ class TestSecurity(unittest.TestCase):
         signature = "fqBLlQaFAW1kUaPGxw76YklkIKQ2QRZVUkwMxhsIvbYg3F8nb1t7O3/c23Y9P6c6RIV/iT8RcUE94E6Wz3n8clDGmCJVSICKBe+BfJajxOp/ITTgHWYGwl6aPzd2ENoqVPmVBwtTYk4qFhxCsOORMHXXWQm5z+tGl3JSAe9gpUiqIHpElDdnNSy87KSUTA+pjuoHc5XWAmOI4MADp3PAeVI0qq90sQfYaH6W6CxbJnRilFwHfAwWuCt4ctlROeJ9mYSo+49Bq4lRcJo8xv5vSyq5aejWQ2czpGq0zNrY+lwq4EbRl/zy/5V/gS4PrZCcCzeG28eCV49JYfaKwPgW7A==";
         timestamp = "2024-07-20T06:02:07.566947Z"
         raw_body = '{"userId":"84d68dda-da91-4ae6-a21a-6faee2f6c8ad"}'
-        past = datetime.datetime.fromisoformat(timestamp)
+        past = isoparse(timestamp)
         now = past + datetime.timedelta(hours=1)
 
         assert verify_trivium_callback_request(

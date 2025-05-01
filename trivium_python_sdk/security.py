@@ -1,4 +1,5 @@
 import datetime
+from dateutil.parser import isoparse
 import base64
 import hashlib
 from cryptography.hazmat.backends import default_backend
@@ -57,7 +58,7 @@ def verify_trivium_callback_request(
             logging.warning(f"An error occurred while verifying Trivium signature: {e}")
             continue
 
-    if is_valid and now > datetime.datetime.fromisoformat(timestamp_from_header) + datetime.timedelta(seconds=validity_period_seconds):
+    if is_valid and now > isoparse(timestamp_from_header) + datetime.timedelta(seconds=validity_period_seconds):
         return False
     else:
         return is_valid
