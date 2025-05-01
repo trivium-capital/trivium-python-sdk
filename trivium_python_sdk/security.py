@@ -21,9 +21,9 @@ def verify_trivium_callback_request(
     """Verify the signature of a webhook request from Trivium.
 
     :param signature_from_header (str): Comma-separated signatures to enable zero-downtime key rotation. Retrieve from HTTP header: "Trivium-Signature".
-    :param raw_webhook_request_body (str): The raw body of the webhook request.
+    :param raw_webhook_request_body (str): The raw body of the webhook request, encoded as a UTF-8 string.
     :param timestamp_from_header (str): Retrieve from HTTP header: "Trivium-Timestamp".
-    :param public_key_base64_encoded (str): Retrieve upon event subscription from Trivium API.
+    :param public_key_base64_encoded (str): Retrieve upon event subscription from Trivium API, for e.g. UserApi.post_api_v1_user_events() or CashApi.post_api_v1_cash_events().
     :param validity_period_seconds (int, optional): Defines window in which timestamp is valid to prevent replay attacks. Recommended value: 600 seconds (10 minutes).
     :param now (datetime, optional): Current time.
 
