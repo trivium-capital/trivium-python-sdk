@@ -92,8 +92,6 @@ docs/UserCallbackEvent.md
 docs/UserDetails.md
 docs/UserStatus.md
 docs/UserTransaction.md
-pyproject.toml
-requirements.txt
 setup.cfg
 setup.py
 test-requirements.txt
