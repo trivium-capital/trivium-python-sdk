@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.8.dev0
+  version: 0.2.8.dev1
 paths:
   /api/v1/user/{userId}:
     get:
@@ -538,13 +538,13 @@ paths:
                   accountId: 40117016-ac89-4690-9986-01102be1ac9b
                   quantity: 1007.33
                   currencyCode: SGD
-                  receivedAt: '2025-05-07T15:04:42Z'
+                  receivedAt: '2025-05-07T15:04:42.746287Z'
                   status: PENDING
                 - type: Redemption
                   accountId: 40117016-ac89-4690-9986-01102be1ac9b
                   quantity: 50.45
                   currencyCode: SGD
-                  receivedAt: '2025-05-07T15:04:42Z'
+                  receivedAt: '2025-05-07T15:04:42.746287Z'
                   status: PENDING
                 totalCount: 2
                 hasNextPage: false
@@ -574,7 +574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2025-05-09'
+                redemptionDate: '2025-05-10'
         '400':
           description: Invalid value
           content:
@@ -1580,7 +1580,7 @@ paths:
                   bankAccountNumber: '87654321'
                   bankCountryCode: SG
                 - paymentType: Swift
-                  currency: USD
+                  currency: SGD
                   bankName: JPMORGAN CHASE BANK
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
@@ -1676,7 +1676,7 @@ paths:
                   bankAccountNumber: '87654321'
                   bankCountryCode: SG
                 - paymentType: Swift
-                  currency: USD
+                  currency: SGD
                   bankName: JPMORGAN CHASE BANK
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
@@ -1780,7 +1780,7 @@ paths:
                 fromCurrency: SGD
                 toAmount: 553.45
                 toCurrency: SGD
-                expiresAt: '2025-05-07T15:04:42Z'
+                expiresAt: '2025-05-07T15:04:42.746287Z'
         '400':
           description: 'Invalid value, Invalid value for: body'
           content:
@@ -2792,6 +2792,72 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentBalance'
+    PaymentIncoming:
+      title: PaymentIncoming
+      type: object
+      required:
+      - transactionId
+      - productId
+      - quantity
+      - currencyCode
+      - createdAt
+      - status
+      - type
+      properties:
+        transactionId:
+          type: string
+          format: uuid
+        productId:
+          type: string
+          format: uuid
+        quantity:
+          type: number
+        currencyCode:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        type:
+          type: string
+          const: PaymentIncoming
+    PaymentOutgoing:
+      title: PaymentOutgoing
+      type: object
+      required:
+      - transactionId
+      - productId
+      - quantity
+      - currencyCode
+      - createdAt
+      - status
+      - type
+      properties:
+        transactionId:
+          type: string
+          format: uuid
+        productId:
+          type: string
+          format: uuid
+        quantity:
+          type: number
+        currencyCode:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        type:
+          type: string
+          const: PaymentOutgoing
     PaymentPurpose:
       title: PaymentPurpose
       description: GDDS - Payment for goods, SCVE - Payment for services, PAYR - Employee
@@ -3364,6 +3430,8 @@ components:
       - $ref: '#/components/schemas/CashRedemption'
       - $ref: '#/components/schemas/FixedDepositRedemption'
       - $ref: '#/components/schemas/FixedDepositTransfer'
+      - $ref: '#/components/schemas/PaymentIncoming'
+      - $ref: '#/components/schemas/PaymentOutgoing'
       discriminator:
         propertyName: type
         mapping:
@@ -3371,6 +3439,8 @@ components:
           CashRedemption: '#/components/schemas/CashRedemption'
           FixedDepositRedemption: '#/components/schemas/FixedDepositRedemption'
           FixedDepositTransfer: '#/components/schemas/FixedDepositTransfer'
+          PaymentIncoming: '#/components/schemas/PaymentIncoming'
+          PaymentOutgoing: '#/components/schemas/PaymentOutgoing'
     CashAccountActivated:
       title: CashAccountActivated
       type: object
