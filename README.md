@@ -82,6 +82,12 @@ Class | Method | HTTP request | Description
 *ManagedPortfoliosApi* | [**get_api_v1_portfolio_positions_userid**](docs/ManagedPortfoliosApi.md#get_api_v1_portfolio_positions_userid) | **GET** /api/v1/portfolio/positions/{userId} | 
 *ManagedPortfoliosApi* | [**post_api_v1_portfolio_deposit**](docs/ManagedPortfoliosApi.md#post_api_v1_portfolio_deposit) | **POST** /api/v1/portfolio/deposit | 
 *ManagedPortfoliosApi* | [**post_api_v1_portfolio_redemption**](docs/ManagedPortfoliosApi.md#post_api_v1_portfolio_redemption) | **POST** /api/v1/portfolio/redemption | 
+*PaymentsApi* | [**get_api_v1_payments_account_accountid**](docs/PaymentsApi.md#get_api_v1_payments_account_accountid) | **GET** /api/v1/payments/account/{accountId} | 
+*PaymentsApi* | [**get_api_v1_payments_account_user_userid**](docs/PaymentsApi.md#get_api_v1_payments_account_user_userid) | **GET** /api/v1/payments/account/user/{userId} | 
+*PaymentsApi* | [**get_api_v1_payments_balances_userid**](docs/PaymentsApi.md#get_api_v1_payments_balances_userid) | **GET** /api/v1/payments/balances/{userId} | 
+*PaymentsApi* | [**post_api_v1_payments_account**](docs/PaymentsApi.md#post_api_v1_payments_account) | **POST** /api/v1/payments/account | 
+*PaymentsApi* | [**post_api_v1_payments_payout**](docs/PaymentsApi.md#post_api_v1_payments_payout) | **POST** /api/v1/payments/payout | 
+*PaymentsApi* | [**post_api_v1_payments_payout_approve**](docs/PaymentsApi.md#post_api_v1_payments_payout_approve) | **POST** /api/v1/payments/payout/approve | 
 *StatementApi* | [**get_api_v1_statement_monthly_userid**](docs/StatementApi.md#get_api_v1_statement_monthly_userid) | **GET** /api/v1/statement/monthly/{userId} | 
 *TradingApi* | [**get_api_v1_trading_instrument_available_userid**](docs/TradingApi.md#get_api_v1_trading_instrument_available_userid) | **GET** /api/v1/trading/instrument/available/{userId} | 
 *TradingApi* | [**get_api_v1_trading_instrument_userid_symbol**](docs/TradingApi.md#get_api_v1_trading_instrument_userid_symbol) | **GET** /api/v1/trading/instrument/{userId}/{symbol} | 
@@ -101,24 +107,32 @@ Class | Method | HTTP request | Description
  - [AccountStatus](docs/AccountStatus.md)
  - [AccountType](docs/AccountType.md)
  - [Action](docs/Action.md)
+ - [AdHocPayoutIntention](docs/AdHocPayoutIntention.md)
+ - [ApprovePayout](docs/ApprovePayout.md)
  - [AssetClass](docs/AssetClass.md)
  - [AssetClassProportion](docs/AssetClassProportion.md)
  - [BadRequest](docs/BadRequest.md)
  - [Balance](docs/Balance.md)
  - [Balances](docs/Balances.md)
+ - [BankAccountDetails](docs/BankAccountDetails.md)
+ - [BeneficiaryDetails](docs/BeneficiaryDetails.md)
+ - [BuySell](docs/BuySell.md)
  - [CashAccountActivated](docs/CashAccountActivated.md)
  - [CashCallbackEvent](docs/CashCallbackEvent.md)
  - [CashDeposit](docs/CashDeposit.md)
  - [CashInboundCallbackEvent](docs/CashInboundCallbackEvent.md)
  - [CashRedemption](docs/CashRedemption.md)
+ - [ChargeType](docs/ChargeType.md)
  - [CompanyDetails](docs/CompanyDetails.md)
  - [Composition](docs/Composition.md)
+ - [CorporateBeneficiaryDetails](docs/CorporateBeneficiaryDetails.md)
  - [CountryProportion](docs/CountryProportion.md)
  - [CreateAccountRequest](docs/CreateAccountRequest.md)
  - [CreateOnboardingDocumentRequest](docs/CreateOnboardingDocumentRequest.md)
  - [CreateOnboardingDocumentResponse](docs/CreateOnboardingDocumentResponse.md)
  - [CreateOrderRequest](docs/CreateOrderRequest.md)
  - [CreateOrderResponse](docs/CreateOrderResponse.md)
+ - [CreatePaymentsAccountRequest](docs/CreatePaymentsAccountRequest.md)
  - [Deposit](docs/Deposit.md)
  - [DepositInstructions](docs/DepositInstructions.md)
  - [DepositPortfolioRequest](docs/DepositPortfolioRequest.md)
@@ -132,6 +146,7 @@ Class | Method | HTTP request | Description
  - [FixedDepositRedemption](docs/FixedDepositRedemption.md)
  - [FixedDepositTransfer](docs/FixedDepositTransfer.md)
  - [Fund](docs/Fund.md)
+ - [IndividualBeneficiaryDetails](docs/IndividualBeneficiaryDetails.md)
  - [IndividualDetails](docs/IndividualDetails.md)
  - [InstrumentInformation](docs/InstrumentInformation.md)
  - [InstrumentQuote](docs/InstrumentQuote.md)
@@ -147,6 +162,13 @@ Class | Method | HTTP request | Description
  - [Order](docs/Order.md)
  - [PaginationResultUserTransaction](docs/PaginationResultUserTransaction.md)
  - [PastReturn](docs/PastReturn.md)
+ - [PaymentBalance](docs/PaymentBalance.md)
+ - [PaymentBalances](docs/PaymentBalances.md)
+ - [PaymentPurpose](docs/PaymentPurpose.md)
+ - [PaymentType](docs/PaymentType.md)
+ - [PaymentsAccount](docs/PaymentsAccount.md)
+ - [PayoutIntention](docs/PayoutIntention.md)
+ - [PayoutResponse](docs/PayoutResponse.md)
  - [PendingFixedDeposit](docs/PendingFixedDeposit.md)
  - [PerformanceSnapshot](docs/PerformanceSnapshot.md)
  - [PortfolioInformation](docs/PortfolioInformation.md)
@@ -155,6 +177,7 @@ Class | Method | HTTP request | Description
  - [ProcessFixedDepositPlacementRequest](docs/ProcessFixedDepositPlacementRequest.md)
  - [ProcessingFixedDeposit](docs/ProcessingFixedDeposit.md)
  - [ProviderDetails](docs/ProviderDetails.md)
+ - [QuoteDetails](docs/QuoteDetails.md)
  - [Rates](docs/Rates.md)
  - [RedeemPortfolioRequest](docs/RedeemPortfolioRequest.md)
  - [RedeemedFixedDeposit](docs/RedeemedFixedDeposit.md)
@@ -165,6 +188,7 @@ Class | Method | HTTP request | Description
  - [RedemptionResponse](docs/RedemptionResponse.md)
  - [RedemptionSettled](docs/RedemptionSettled.md)
  - [RetrieveDocumentSigningLinkResponse](docs/RetrieveDocumentSigningLinkResponse.md)
+ - [RoutingCodeType](docs/RoutingCodeType.md)
  - [SubscribeCallbackRequest](docs/SubscribeCallbackRequest.md)
  - [SubscribeCallbackRequestWithSignature](docs/SubscribeCallbackRequestWithSignature.md)
  - [SubscribeCallbackResponse](docs/SubscribeCallbackResponse.md)
