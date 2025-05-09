@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.7
+  version: 0.2.8.dev0
 paths:
   /api/v1/user/{userId}:
     get:
@@ -538,13 +538,13 @@ paths:
                   accountId: 40117016-ac89-4690-9986-01102be1ac9b
                   quantity: 1007.33
                   currencyCode: SGD
-                  receivedAt: '2025-03-25T10:05:22.180272835Z'
+                  receivedAt: '2025-05-07T15:04:42Z'
                   status: PENDING
                 - type: Redemption
                   accountId: 40117016-ac89-4690-9986-01102be1ac9b
                   quantity: 50.45
                   currencyCode: SGD
-                  receivedAt: '2025-03-25T10:05:22.181718272Z'
+                  receivedAt: '2025-05-07T15:04:42Z'
                   status: PENDING
                 totalCount: 2
                 hasNextPage: false
@@ -574,7 +574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2025-03-26'
+                redemptionDate: '2025-05-09'
         '400':
           description: Invalid value
           content:
@@ -1543,6 +1543,281 @@ paths:
       security:
       - apiKeyAuth: []
         httpAuth: []
+  /api/v1/payments/account/{accountId}:
+    get:
+      tags:
+      - payments
+      description: ''
+      operationId: getApiV1PaymentsAccountAccountid
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentsAccount'
+              example:
+                accountId: 52ac3a7a-dc33-4ceb-b641-1a885833735e
+                currencyCode: SGD
+                status: ACTIVE
+                provider:
+                  provider: Payment Bank
+                  productName: Virtual Account
+                  currencyCode: SGD
+                  returns: 0.0
+                depositInstructions:
+                - paymentType: Fast
+                  currency: SGD
+                  bankName: DBS
+                  bankAccountHolderName: My Company Pte. Ltd.
+                  bankAccountNumber: '87654321'
+                  bankCountryCode: SG
+                - paymentType: Swift
+                  currency: USD
+                  bankName: JPMORGAN CHASE BANK
+                  bankAccountHolderName: My Company Pte. Ltd.
+                  bankAccountNumber: '3333333'
+                  bankCountryCode: US
+                  routingCodeType1: BIC_SWIFT
+                  routingCodeValue1: CHASUS33XXX
+        '400':
+          description: 'Invalid value, Invalid value for: path parameter accountId'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - apiKeyAuth: []
+        httpAuth: []
+  /api/v1/payments/account:
+    post:
+      tags:
+      - payments
+      description: Create payment account
+      operationId: postApiV1PaymentsAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePaymentsAccountRequest'
+            example:
+              userId: 22678710-8f43-4f85-8108-3d6eb87f31f9
+              currencyCode: SGD
+              desiredBankCountry: SG
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentsAccount'
+              example:
+                accountId: a702e485-bf20-4495-9a9d-061546ba01eb
+                currencyCode: SGD
+                status: PENDING
+                provider:
+                  provider: Payment Bank
+                  productName: Virtual Account
+                  currencyCode: SGD
+                  returns: 0.0
+        '400':
+          description: 'Invalid value, Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - apiKeyAuth: []
+        httpAuth: []
+  /api/v1/payments/account/user/{userId}:
+    get:
+      tags:
+      - payments
+      description: ''
+      operationId: getApiV1PaymentsAccountUserUserid
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentsAccount'
+              example:
+              - accountId: 52ac3a7a-dc33-4ceb-b641-1a885833735e
+                currencyCode: SGD
+                status: ACTIVE
+                provider:
+                  provider: Payment Bank
+                  productName: Virtual Account
+                  currencyCode: SGD
+                  returns: 0.0
+                depositInstructions:
+                - paymentType: Fast
+                  currency: SGD
+                  bankName: DBS
+                  bankAccountHolderName: My Company Pte. Ltd.
+                  bankAccountNumber: '87654321'
+                  bankCountryCode: SG
+                - paymentType: Swift
+                  currency: USD
+                  bankName: JPMORGAN CHASE BANK
+                  bankAccountHolderName: My Company Pte. Ltd.
+                  bankAccountNumber: '3333333'
+                  bankCountryCode: US
+                  routingCodeType1: BIC_SWIFT
+                  routingCodeValue1: CHASUS33XXX
+        '400':
+          description: 'Invalid value, Invalid value for: path parameter userId'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - apiKeyAuth: []
+        httpAuth: []
+  /api/v1/payments/balances/{userId}:
+    get:
+      tags:
+      - payments
+      description: ''
+      operationId: getApiV1PaymentsBalancesUserid
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentBalances'
+              example:
+                balances:
+                - amount: 88837.43
+                  currencyCode: SGD
+                - amount: 1778.11
+                  currencyCode: USD
+        '400':
+          description: 'Invalid value, Invalid value for: path parameter userId'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - apiKeyAuth: []
+        httpAuth: []
+  /api/v1/payments/payout:
+    post:
+      tags:
+      - payments
+      description: Create Payout Intention
+      operationId: postApiV1PaymentsPayout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayoutIntention'
+            examples:
+              Ad-hoc Payout:
+                value:
+                  type: AdHocPayoutIntention
+                  fromAccountId: 52ac3a7a-dc33-4ceb-b641-1a885833735e
+                  quote:
+                    sellCurrency: SGD
+                    buyCurrency: USD
+                    fixedSide: Sell
+                    amount: 9
+                    recipientBankCountry: SG
+                    chargeType: OURS
+                  beneficiary:
+                    type: CorporateBeneficiaryDetails
+                    companyName: My Supplier Pte. Ltd.
+                    address: 1 Lorong Satu, Singapore 110111
+                    city: Singapore
+                    country: SG
+                    postalCode: '456789'
+                  bankAccountDetails:
+                    paymentType: Swift
+                    currency: USD
+                    bankName: DBS Ltd
+                    bankAccountHolderName: My Supplier Pte. Ltd.
+                    bankAccountNumber: '87654321'
+                    bankCountryCode: SG
+                    routingCodeType1: BIC_SWIFT
+                    routingCodeValue1: DBSSSGSG
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayoutResponse'
+              example:
+                payoutIntentionId: 3c538b72-76af-4aa1-bba3-fe0e12746f3f
+                fromAmount: 553.45
+                fromCurrency: SGD
+                toAmount: 553.45
+                toCurrency: SGD
+                expiresAt: '2025-05-07T15:04:42Z'
+        '400':
+          description: 'Invalid value, Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - apiKeyAuth: []
+        httpAuth: []
+  /api/v1/payments/payout/approve:
+    post:
+      tags:
+      - payments
+      description: ''
+      operationId: postApiV1PaymentsPayoutApprove
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApprovePayout'
+            example:
+              payoutIntentionId: 468c5434-5d06-4c14-893f-c7c26a6e27ca
+              purposeOfPayment: GDDS
+              uniqueReference: INV20240319-1192
+        required: true
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: 'Invalid value, Invalid value for: body'
+          content:
+            text/plain:
+              schema:
+                type: string
+      security:
+      - apiKeyAuth: []
+        httpAuth: []
 components:
   schemas:
     Account:
@@ -1592,6 +1867,43 @@ components:
       enum:
       - BUY
       - Sell
+    AdHocPayoutIntention:
+      title: AdHocPayoutIntention
+      type: object
+      required:
+      - fromAccountId
+      - quote
+      - beneficiary
+      - bankAccountDetails
+      - type
+      properties:
+        fromAccountId:
+          type: string
+          format: uuid
+        quote:
+          $ref: '#/components/schemas/QuoteDetails'
+        beneficiary:
+          $ref: '#/components/schemas/BeneficiaryDetails'
+        bankAccountDetails:
+          $ref: '#/components/schemas/BankAccountDetails'
+        type:
+          type: string
+          const: AdHocPayoutIntention
+    ApprovePayout:
+      title: ApprovePayout
+      type: object
+      required:
+      - payoutIntentionId
+      - purposeOfPayment
+      - uniqueReference
+      properties:
+        payoutIntentionId:
+          type: string
+          format: uuid
+        purposeOfPayment:
+          $ref: '#/components/schemas/PaymentPurpose'
+        uniqueReference:
+          type: string
     AssetClass:
       title: AssetClass
       type: string
@@ -1637,6 +1949,53 @@ components:
       properties:
         balance:
           $ref: '#/components/schemas/Map_Balance'
+    BankAccountDetails:
+      title: BankAccountDetails
+      type: object
+      required:
+      - paymentType
+      - currency
+      - bankName
+      - bankAccountHolderName
+      - bankAccountNumber
+      - bankCountryCode
+      properties:
+        paymentType:
+          $ref: '#/components/schemas/PaymentType'
+        currency:
+          type: string
+        bankName:
+          type: string
+        bankAccountHolderName:
+          type: string
+        bankAccountNumber:
+          type: string
+        bankCountryCode:
+          type: string
+        routingCodeType1:
+          $ref: '#/components/schemas/RoutingCodeType'
+        routingCodeValue1:
+          type: string
+        routingCodeType2:
+          $ref: '#/components/schemas/RoutingCodeType'
+        routingCodeValue2:
+          type: string
+    BeneficiaryDetails:
+      title: BeneficiaryDetails
+      oneOf:
+      - $ref: '#/components/schemas/CorporateBeneficiaryDetails'
+      - $ref: '#/components/schemas/IndividualBeneficiaryDetails'
+      discriminator:
+        propertyName: type
+        mapping:
+          CorporateBeneficiaryDetails: '#/components/schemas/CorporateBeneficiaryDetails'
+          IndividualBeneficiaryDetails: '#/components/schemas/IndividualBeneficiaryDetails'
+    BuySell:
+      title: BuySell
+      type: string
+      enum:
+      - Buy
+      - Sell
     CashDeposit:
       title: CashDeposit
       type: object
@@ -1705,6 +2064,12 @@ components:
         type:
           type: string
           const: CashRedemption
+    ChargeType:
+      title: ChargeType
+      type: string
+      enum:
+      - OURS
+      - SHARED
     CompanyDetails:
       title: CompanyDetails
       type: object
@@ -1749,6 +2114,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CountryProportion'
+    CorporateBeneficiaryDetails:
+      title: CorporateBeneficiaryDetails
+      type: object
+      required:
+      - companyName
+      - address
+      - city
+      - country
+      - type
+      properties:
+        companyName:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        state:
+          type: string
+        postalCode:
+          type: string
+        type:
+          type: string
+          const: CorporateBeneficiaryDetails
     CountryProportion:
       title: CountryProportion
       type: object
@@ -1820,6 +2210,21 @@ components:
         orderId:
           type: string
           format: uuid
+    CreatePaymentsAccountRequest:
+      title: CreatePaymentsAccountRequest
+      type: object
+      required:
+      - userId
+      - currencyCode
+      - desiredBankCountry
+      properties:
+        userId:
+          type: string
+          format: uuid
+        currencyCode:
+          type: string
+        desiredBankCountry:
+          type: string
     Deposit:
       title: Deposit
       type: object
@@ -1930,12 +2335,82 @@ components:
         Full names of banks:
         DBS - DBS Bank Ltd,
         HSBC_CORP - HSBC Bank (Corporate),
-        HSBC_SG - HSBC Bank (Singapore)
+        HSBC_SG - HSBC Bank (Singapore),
+        ANEXT - Anext Bank Pte Ltd,
+        ANZ - ANZ Bank,
+        BANK_OF_CHINA - Bank of China,
+        BNP - BNP Paribas,
+        CIMB - CIMB Bank,
+        CITI_NA - Citibank N.A., Singapore Branch,
+        CITI_SG - Citibank Singapore Limited,
+        DEUTSCHE - Deutsche Bank,
+        GLDB - Green Link Digital Bank Pte Ltd,
+        GXS - GXS Bank Pte Ltd,
+        HL - Hong Leong Bank Singapore,
+        ICICI - ICICI Bank Limited Singapore,
+        ICBOC - Industrial and Commercial Bank of China Limited,
+        JP_MORGAN - JPMorgan Chase Bank, N.A.,
+        MARIBANK - MariBank Singapore Private Limited,
+        MAYBANK - Maybank Singapore Limited,
+        MALAYAN_BANKING - Malayan Banking Berhad,
+        MIZUHO - Mizuho Bank,
+        MUFG - MUFG Bank, Ltd,
+        OCBC - OCBC Bank,
+        RHB - RHB Bank,
+        STANDARD_CHARTERED - Standard Chartered Bank (Singapore) Limited,
+        SING_FINANCE - Sing Investments & Finance Limited,
+        SBI - State Bank of India,
+        SMBC - Sumitomo Mitsui Banking Corporation,
+        TRUST - Trust Bank Singapore Limited,
+        UOB - United Overseas Bank
+
+        Full names of NFIs:
+        GRAB_PAY - GPay Network (S) Pte Ltd,
+        LIQUID - Liquid Group Pte Ltd,
+        MATCHMOVE - MatchMove Pay Pte Ltd,
+        NIUM - NIUM Pte Ltd,
+        DASH - SingCash Pte Ltd,
+        WISE - Wise Asia-Pacific Pte. Ltd.,
+        XFERS - Xfers Pte Ltd
       type: string
       enum:
+      - ANEXT
+      - ANZ
+      - BANK_OF_CHINA
+      - BNP
+      - CIMB
+      - CITI_NA
+      - CITI_SG
+      - DASH
       - DBS
+      - DEUTSCHE
+      - GLDB
+      - GRAB_PAY
+      - GXS
+      - HL
       - HSBC_CORP
       - HSBC_SG
+      - ICBOC
+      - ICICI
+      - JP_MORGAN
+      - LIQUID
+      - MALAYAN_BANKING
+      - MARIBANK
+      - MATCHMOVE
+      - MAYBANK
+      - MIZUHO
+      - MUFG
+      - NIUM
+      - OCBC
+      - RHB
+      - SBI
+      - SING_FINANCE
+      - SMBC
+      - STANDARD_CHARTERED
+      - TRUST
+      - UOB
+      - WISE
+      - XFERS
     FixedDepositPlacement:
       title: FixedDepositPlacement
       oneOf:
@@ -2030,6 +2505,34 @@ components:
           type: number
         assetClass:
           $ref: '#/components/schemas/AssetClass'
+    IndividualBeneficiaryDetails:
+      title: IndividualBeneficiaryDetails
+      type: object
+      required:
+      - firstName
+      - lastName
+      - address
+      - city
+      - country
+      - type
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        postalCode:
+          type: string
+        type:
+          type: string
+          const: IndividualBeneficiaryDetails
     IndividualDetails:
       title: IndividualDetails
       type: object
@@ -2270,6 +2773,103 @@ components:
           format: int32
         returns:
           type: number
+    PaymentBalance:
+      title: PaymentBalance
+      type: object
+      required:
+      - amount
+      - currencyCode
+      properties:
+        amount:
+          type: number
+        currencyCode:
+          type: string
+    PaymentBalances:
+      title: PaymentBalances
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentBalance'
+    PaymentPurpose:
+      title: PaymentPurpose
+      description: GDDS - Payment for goods, SCVE - Payment for services, PAYR - Employee
+        payroll, CASH - Capital transfer, INVS - Investment, CHAR - Charity donation,
+        INTC - Transfer to own account, LOAR - Repayment of loan, OTHR - Others
+      type: string
+      enum:
+      - CASH
+      - CHAR
+      - GDDS
+      - INTC
+      - INVS
+      - LOAR
+      - OTHR
+      - PAYR
+      - SCVE
+    PaymentType:
+      title: PaymentType
+      type: string
+      enum:
+      - Fast
+      - LocalTransfer
+      - Swift
+    PaymentsAccount:
+      title: PaymentsAccount
+      type: object
+      required:
+      - accountId
+      - currencyCode
+      - status
+      - provider
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        currencyCode:
+          type: string
+        status:
+          $ref: '#/components/schemas/AccountStatus'
+        provider:
+          $ref: '#/components/schemas/ProviderDetails'
+        depositInstructions:
+          type: array
+          items:
+            $ref: '#/components/schemas/BankAccountDetails'
+    PayoutIntention:
+      title: PayoutIntention
+      oneOf:
+      - $ref: '#/components/schemas/AdHocPayoutIntention'
+      discriminator:
+        propertyName: type
+        mapping:
+          AdHocPayoutIntention: '#/components/schemas/AdHocPayoutIntention'
+    PayoutResponse:
+      title: PayoutResponse
+      type: object
+      required:
+      - payoutIntentionId
+      - fromAmount
+      - fromCurrency
+      - toAmount
+      - toCurrency
+      - expiresAt
+      properties:
+        payoutIntentionId:
+          type: string
+          format: uuid
+        fromAmount:
+          type: number
+        fromCurrency:
+          type: string
+        toAmount:
+          type: number
+        toCurrency:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
     PendingFixedDeposit:
       title: PendingFixedDeposit
       type: object
@@ -2419,6 +3019,28 @@ components:
           type: string
         returns:
           type: number
+    QuoteDetails:
+      title: QuoteDetails
+      type: object
+      required:
+      - sellCurrency
+      - buyCurrency
+      - amount
+      - recipientBankCountry
+      - chargeType
+      properties:
+        sellCurrency:
+          type: string
+        buyCurrency:
+          type: string
+        fixedSide:
+          $ref: '#/components/schemas/BuySell'
+        amount:
+          type: number
+        recipientBankCountry:
+          type: string
+        chargeType:
+          $ref: '#/components/schemas/ChargeType'
     Rates:
       title: Rates
       type: object
@@ -2566,6 +3188,19 @@ components:
       properties:
         url:
           type: string
+    RoutingCodeType:
+      title: RoutingCodeType
+      type: string
+      enum:
+      - ABA
+      - ACH_ROUTING_NUMBER
+      - BANK_CODE
+      - BIC_SWIFT
+      - BRANCH_CODE
+      - BSB_CODE
+      - IFSC
+      - SORT_CODE
+      - WIRE_ROUTING_NUMBER
     SubscribeCallbackRequest:
       title: SubscribeCallbackRequest
       oneOf:
