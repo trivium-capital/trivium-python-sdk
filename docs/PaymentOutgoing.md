@@ -1,4 +1,4 @@
-# UserTransaction
+# PaymentOutgoing
 
 
 ## Properties
@@ -9,28 +9,27 @@ Name | Type | Description | Notes
 **product_id** | **str** |  | 
 **quantity** | **float** |  | 
 **currency_code** | **str** |  | 
-**received_at** | **datetime** |  | 
-**status** | [**TransactionStatus**](TransactionStatus.md) |  | 
-**type** | **str** |  | 
 **created_at** | **datetime** |  | 
 **completed_at** | **datetime** |  | [optional] 
+**status** | [**TransactionStatus**](TransactionStatus.md) |  | 
+**type** | **str** |  | 
 
 ## Example
 
 ```python
-from trivium_python_sdk.models.user_transaction import UserTransaction
+from trivium_python_sdk.models.payment_outgoing import PaymentOutgoing
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of UserTransaction from a JSON string
-user_transaction_instance = UserTransaction.from_json(json)
+# create an instance of PaymentOutgoing from a JSON string
+payment_outgoing_instance = PaymentOutgoing.from_json(json)
 # print the JSON string representation of the object
-print(UserTransaction.to_json())
+print(PaymentOutgoing.to_json())
 
 # convert the object into a dict
-user_transaction_dict = user_transaction_instance.to_dict()
-# create an instance of UserTransaction from a dict
-user_transaction_from_dict = UserTransaction.from_dict(user_transaction_dict)
+payment_outgoing_dict = payment_outgoing_instance.to_dict()
+# create an instance of PaymentOutgoing from a dict
+payment_outgoing_from_dict = PaymentOutgoing.from_dict(payment_outgoing_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

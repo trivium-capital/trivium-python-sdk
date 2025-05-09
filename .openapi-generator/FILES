@@ -64,6 +64,8 @@ docs/PaginationResultUserTransaction.md
 docs/PastReturn.md
 docs/PaymentBalance.md
 docs/PaymentBalances.md
+docs/PaymentIncoming.md
+docs/PaymentOutgoing.md
 docs/PaymentPurpose.md
 docs/PaymentType.md
 docs/PaymentsAccount.md
@@ -115,6 +117,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_payment_incoming.py
+test/test_payment_outgoing.py
 tox.ini
 trivium_python_sdk/__init__.py
 trivium_python_sdk/api/__init__.py
@@ -192,6 +196,8 @@ trivium_python_sdk/models/pagination_result_user_transaction.py
 trivium_python_sdk/models/past_return.py
 trivium_python_sdk/models/payment_balance.py
 trivium_python_sdk/models/payment_balances.py
+trivium_python_sdk/models/payment_incoming.py
+trivium_python_sdk/models/payment_outgoing.py
 trivium_python_sdk/models/payment_purpose.py
 trivium_python_sdk/models/payment_type.py
 trivium_python_sdk/models/payments_account.py

@@ -17,18 +17,33 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Union
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from trivium_python_sdk.models.transaction_status import TransactionStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentBalance(BaseModel):
+class PaymentOutgoing(BaseModel):
     """
-    PaymentBalance
+    PaymentOutgoing
     """ # noqa: E501
-    amount: Union[StrictFloat, StrictInt]
+    transaction_id: StrictStr = Field(alias="transactionId")
+    product_id: StrictStr = Field(alias="productId")
+    quantity: Union[StrictFloat, StrictInt]
     currency_code: StrictStr = Field(alias="currencyCode")
-    __properties: ClassVar[List[str]] = ["amount", "currencyCode"]
+    created_at: datetime = Field(alias="createdAt")
+    completed_at: Optional[datetime] = Field(default=None, alias="completedAt")
+    status: TransactionStatus
+    type: StrictStr
+    __properties: ClassVar[List[str]] = ["transactionId", "productId", "quantity", "currencyCode", "createdAt", "completedAt", "status", "type"]
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in set(['PaymentOutgoing']):
+            raise ValueError("must be one of enum values ('PaymentOutgoing')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +63,7 @@ class PaymentBalance(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentBalance from a JSON string"""
+        """Create an instance of PaymentOutgoing from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,7 +88,7 @@ class PaymentBalance(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentBalance from a dict"""
+        """Create an instance of PaymentOutgoing from a dict"""
         if obj is None:
             return None
 
@@ -81,8 +96,14 @@ class PaymentBalance(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "amount": obj.get("amount"),
-            "currencyCode": obj.get("currencyCode")
+            "transactionId": obj.get("transactionId"),
+            "productId": obj.get("productId"),
+            "quantity": obj.get("quantity"),
+            "currencyCode": obj.get("currencyCode"),
+            "createdAt": obj.get("createdAt"),
+            "completedAt": obj.get("completedAt"),
+            "status": obj.get("status"),
+            "type": obj.get("type")
         })
         return _obj
 
