@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** |  | 
+**available_balance** | **float** |  | 
+**pending_balance** | **float** |  | 
 **currency_code** | **str** |  | 
 
 ## Example

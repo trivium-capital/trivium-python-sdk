@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **payout_intention_id** | **str** |  | 
 **purpose_of_payment** | [**PaymentPurpose**](PaymentPurpose.md) |  | 
-**unique_reference** | **str** |  | 
+**unique_reference** | **str** |  | [optional] 
 
 ## Example
 

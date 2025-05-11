@@ -117,8 +117,6 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
-test/test_payment_incoming.py
-test/test_payment_outgoing.py
 tox.ini
 trivium_python_sdk/__init__.py
 trivium_python_sdk/api/__init__.py
