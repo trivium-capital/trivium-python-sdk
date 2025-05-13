@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.8.dev2
+  version: 0.2.8.dev3
 paths:
   /api/v1/user/{userId}:
     get:
@@ -574,7 +574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2025-05-12'
+                redemptionDate: '2025-05-14'
         '400':
           description: Invalid value
           content:
@@ -1683,6 +1683,23 @@ paths:
                   bankCountryCode: US
                   routingCodeType1: BIC_SWIFT
                   routingCodeValue1: CHASUS33XXX
+              - accountId: f7fde049-bbd6-4db7-9d0f-a28adbf4a138
+                currencyCode: USD
+                status: ACTIVE
+                provider:
+                  provider: Payment Bank
+                  productName: Virtual Account
+                  currencyCode: USD
+                  returns: 0.0
+                depositInstructions:
+                - paymentType: Swift
+                  currency: USD
+                  bankName: JPMORGAN CHASE BANK
+                  bankAccountHolderName: My Company Pte. Ltd.
+                  bankAccountNumber: '3333333'
+                  bankCountryCode: US
+                  routingCodeType1: BIC_SWIFT
+                  routingCodeValue1: CHASUS33XXX
         '400':
           description: 'Invalid value, Invalid value for: path parameter userId'
           content:
@@ -1746,10 +1763,10 @@ paths:
                   type: AdHocPayoutIntention
                   fromAccountId: 52ac3a7a-dc33-4ceb-b641-1a885833735e
                   quote:
-                    sellCurrency: SGD
-                    buyCurrency: USD
-                    fixedSide: Sell
-                    amount: 9
+                    sellCurrency: USD
+                    buyCurrency: SGD
+                    fixedSide: Buy
+                    amount: 721.8
                     recipientBankCountry: SG
                     chargeType: OURS
                   beneficiary:
@@ -1778,10 +1795,13 @@ paths:
                 $ref: '#/components/schemas/PayoutResponse'
               example:
                 payoutIntentionId: 3c538b72-76af-4aa1-bba3-fe0e12746f3f
-                fromAmount: 553.45
-                fromCurrency: SGD
-                toAmount: 721.8
-                toCurrency: USD
+                sellAmount: 535.13
+                sellCurrency: USD
+                buyAmount: 721.8
+                buyCurrency: SGD
+                rate: 1.3488413
+                totalFees: 0.81
+                totalAmount: 535.94
                 expiresAt: '2025-05-07T15:04:42.746287Z'
         '400':
           description: 'Invalid value, Invalid value for: body'
@@ -1900,7 +1920,6 @@ components:
       properties:
         payoutIntentionId:
           type: string
-          format: uuid
         purposeOfPayment:
           $ref: '#/components/schemas/PaymentPurpose'
         uniqueReference:
@@ -2920,23 +2939,31 @@ components:
       type: object
       required:
       - payoutIntentionId
-      - fromAmount
-      - fromCurrency
-      - toAmount
-      - toCurrency
+      - sellAmount
+      - sellCurrency
+      - buyAmount
+      - buyCurrency
+      - rate
+      - totalFees
+      - totalAmount
       - expiresAt
       properties:
         payoutIntentionId:
           type: string
-          format: uuid
-        fromAmount:
+        sellAmount:
           type: number
-        fromCurrency:
+        sellCurrency:
           type: string
-        toAmount:
+        buyAmount:
           type: number
-        toCurrency:
+        buyCurrency:
           type: string
+        rate:
+          type: number
+        totalFees:
+          type: number
+        totalAmount:
+          type: number
         expiresAt:
           type: string
           format: date-time
