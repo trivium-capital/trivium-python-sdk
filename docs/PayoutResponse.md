@@ -6,10 +6,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **payout_intention_id** | **str** |  | 
-**from_amount** | **float** |  | 
-**from_currency** | **str** |  | 
-**to_amount** | **float** |  | 
-**to_currency** | **str** |  | 
+**sell_amount** | **float** |  | 
+**sell_currency** | **str** |  | 
+**buy_amount** | **float** |  | 
+**buy_currency** | **str** |  | 
+**rate** | **float** |  | 
+**total_fees** | **float** |  | 
+**total_amount** | **float** |  | 
 **expires_at** | **datetime** |  | 
 
 ## Example
