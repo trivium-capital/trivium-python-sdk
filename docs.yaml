@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.8.dev3
+  version: 0.2.8.dev4
 paths:
   /api/v1/user/{userId}:
     get:
