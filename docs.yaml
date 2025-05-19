@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.8.dev4
+  version: 0.2.8.dev5
 paths:
   /api/v1/user/{userId}:
     get:
@@ -574,7 +574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2025-05-14'
+                redemptionDate: '2025-05-20'
         '400':
           description: Invalid value
           content:
@@ -1575,16 +1575,16 @@ paths:
                 depositInstructions:
                 - paymentType: Fast
                   currency: SGD
-                  bankName: DBS
+                  bankName: DBS Bank Ltd
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '87654321'
-                  bankCountryCode: SG
+                  bankCountry: SG
                 - paymentType: Swift
                   currency: SGD
-                  bankName: JPMORGAN CHASE BANK
+                  bankName: JPMORGAN CHASE BANK, N.A.
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
-                  bankCountryCode: US
+                  bankCountry: US
                   routingCodeType1: BIC_SWIFT
                   routingCodeValue1: CHASUS33XXX
         '400':
@@ -1671,16 +1671,16 @@ paths:
                 depositInstructions:
                 - paymentType: Fast
                   currency: SGD
-                  bankName: DBS
+                  bankName: DBS Bank Ltd
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '87654321'
-                  bankCountryCode: SG
+                  bankCountry: SG
                 - paymentType: Swift
                   currency: SGD
-                  bankName: JPMORGAN CHASE BANK
+                  bankName: JPMORGAN CHASE BANK, N.A.
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
-                  bankCountryCode: US
+                  bankCountry: US
                   routingCodeType1: BIC_SWIFT
                   routingCodeValue1: CHASUS33XXX
               - accountId: f7fde049-bbd6-4db7-9d0f-a28adbf4a138
@@ -1694,10 +1694,10 @@ paths:
                 depositInstructions:
                 - paymentType: Swift
                   currency: USD
-                  bankName: JPMORGAN CHASE BANK
+                  bankName: JPMORGAN CHASE BANK, N.A.
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
-                  bankCountryCode: US
+                  bankCountry: US
                   routingCodeType1: BIC_SWIFT
                   routingCodeValue1: CHASUS33XXX
         '400':
@@ -1782,7 +1782,7 @@ paths:
                     bankName: DBS Ltd
                     bankAccountHolderName: My Supplier Pte. Ltd.
                     bankAccountNumber: '87654321'
-                    bankCountryCode: SG
+                    bankCountry: SG
                     routingCodeType1: BIC_SWIFT
                     routingCodeValue1: DBSSSGSG
         required: true
@@ -1978,7 +1978,7 @@ components:
       - bankName
       - bankAccountHolderName
       - bankAccountNumber
-      - bankCountryCode
+      - bankCountry
       properties:
         paymentType:
           $ref: '#/components/schemas/PaymentType'
@@ -1990,7 +1990,7 @@ components:
           type: string
         bankAccountNumber:
           type: string
-        bankCountryCode:
+        bankCountry:
           type: string
         routingCodeType1:
           $ref: '#/components/schemas/RoutingCodeType'
