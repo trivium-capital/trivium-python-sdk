@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.8.dev5
+  version: 0.2.8.dev6
 paths:
   /api/v1/user/{userId}:
     get:
@@ -574,7 +574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2025-05-20'
+                redemptionDate: '2025-06-04'
         '400':
           description: Invalid value
           content:
@@ -624,13 +624,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaginationResult_UserTransaction'
         '400':
-          description: 'Invalid value, Invalid value for: path parameter userId, Invalid
-            value for: query parameter limit, Invalid value for: query parameter offset,
-            Invalid value for: query parameter transactionId'
+          description: ''
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Invalid value for X-Api-Key or Authorization HTTP header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '502':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGateway'
       security:
       - apiKeyAuth: []
         httpAuth: []
@@ -1593,6 +1609,18 @@ paths:
             text/plain:
               schema:
                 type: string
+        '401':
+          description: Invalid value for X-Api-Key or Authorization HTTP header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
       security:
       - apiKeyAuth: []
         httpAuth: []
@@ -1610,7 +1638,6 @@ paths:
             example:
               userId: 22678710-8f43-4f85-8108-3d6eb87f31f9
               currencyCode: SGD
-              desiredBankCountry: SG
         required: true
       responses:
         '200':
@@ -1738,11 +1765,23 @@ paths:
                   pendingBalance: 0
                   currencyCode: USD
         '400':
-          description: 'Invalid value, Invalid value for: path parameter userId'
+          description: ''
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Invalid value for X-Api-Key or Authorization HTTP header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
       security:
       - apiKeyAuth: []
         httpAuth: []
@@ -1795,6 +1834,7 @@ paths:
                 $ref: '#/components/schemas/PayoutResponse'
               example:
                 payoutIntentionId: 3c538b72-76af-4aa1-bba3-fe0e12746f3f
+                recipientRefId: '999'
                 sellAmount: 535.13
                 sellCurrency: USD
                 buyAmount: 721.8
@@ -1804,11 +1844,29 @@ paths:
                 totalAmount: 535.94
                 expiresAt: '2025-05-07T15:04:42.746287Z'
         '400':
-          description: 'Invalid value, Invalid value for: body'
+          description: ''
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Invalid value for X-Api-Key or Authorization HTTP header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '502':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGateway'
       security:
       - apiKeyAuth: []
         httpAuth: []
@@ -1822,7 +1880,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ApprovePayout'
+              $ref: '#/components/schemas/ApprovePayoutDeprecated'
             example:
               payoutIntentionId: 468c5434-5d06-4c14-893f-c7c26a6e27ca
               purposeOfPayment: GDDS
@@ -1837,6 +1895,60 @@ paths:
             text/plain:
               schema:
                 type: string
+      security:
+      - apiKeyAuth: []
+        httpAuth: []
+  /api/v1/payments/payout/approve/{accountId}:
+    post:
+      tags:
+      - payments
+      description: ''
+      operationId: postApiV1PaymentsPayoutApproveAccountid
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApprovePayout'
+            example:
+              payoutIntentionId: 468c5434-5d06-4c14-893f-c7c26a6e27ca
+              recipientRefId: '999'
+              purposeOfPayment: GDDS
+              uniqueReference: INV20240319-1192
+        required: true
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '401':
+          description: Invalid value for X-Api-Key or Authorization HTTP header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unauthorized'
+        '404':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '502':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGateway'
       security:
       - apiKeyAuth: []
         httpAuth: []
@@ -1916,6 +2028,22 @@ components:
       type: object
       required:
       - payoutIntentionId
+      - recipientRefId
+      - purposeOfPayment
+      properties:
+        payoutIntentionId:
+          type: string
+        recipientRefId:
+          type: string
+        purposeOfPayment:
+          $ref: '#/components/schemas/PaymentPurpose'
+        uniqueReference:
+          type: string
+    ApprovePayoutDeprecated:
+      title: ApprovePayoutDeprecated
+      type: object
+      required:
+      - payoutIntentionId
       - purposeOfPayment
       properties:
         payoutIntentionId:
@@ -1942,6 +2070,14 @@ components:
           $ref: '#/components/schemas/AssetClass'
         proportion:
           type: number
+    BadGateway:
+      title: BadGateway
+      type: object
+      required:
+      - message
+      properties:
+        message:
+          type: string
     BadRequest:
       title: BadRequest
       type: object
@@ -2236,14 +2372,11 @@ components:
       required:
       - userId
       - currencyCode
-      - desiredBankCountry
       properties:
         userId:
           type: string
           format: uuid
         currencyCode:
-          type: string
-        desiredBankCountry:
           type: string
     Deposit:
       title: Deposit
@@ -2355,82 +2488,12 @@ components:
         Full names of banks:
         DBS - DBS Bank Ltd,
         HSBC_CORP - HSBC Bank (Corporate),
-        HSBC_SG - HSBC Bank (Singapore),
-        ANEXT - Anext Bank Pte Ltd,
-        ANZ - ANZ Bank,
-        BANK_OF_CHINA - Bank of China,
-        BNP - BNP Paribas,
-        CIMB - CIMB Bank,
-        CITI_NA - Citibank N.A., Singapore Branch,
-        CITI_SG - Citibank Singapore Limited,
-        DEUTSCHE - Deutsche Bank,
-        GLDB - Green Link Digital Bank Pte Ltd,
-        GXS - GXS Bank Pte Ltd,
-        HL - Hong Leong Bank Singapore,
-        ICICI - ICICI Bank Limited Singapore,
-        ICBOC - Industrial and Commercial Bank of China Limited,
-        JP_MORGAN - JPMorgan Chase Bank, N.A.,
-        MARIBANK - MariBank Singapore Private Limited,
-        MAYBANK - Maybank Singapore Limited,
-        MALAYAN_BANKING - Malayan Banking Berhad,
-        MIZUHO - Mizuho Bank,
-        MUFG - MUFG Bank, Ltd,
-        OCBC - OCBC Bank,
-        RHB - RHB Bank,
-        STANDARD_CHARTERED - Standard Chartered Bank (Singapore) Limited,
-        SING_FINANCE - Sing Investments & Finance Limited,
-        SBI - State Bank of India,
-        SMBC - Sumitomo Mitsui Banking Corporation,
-        TRUST - Trust Bank Singapore Limited,
-        UOB - United Overseas Bank
-
-        Full names of NFIs:
-        GRAB_PAY - GPay Network (S) Pte Ltd,
-        LIQUID - Liquid Group Pte Ltd,
-        MATCHMOVE - MatchMove Pay Pte Ltd,
-        NIUM - NIUM Pte Ltd,
-        DASH - SingCash Pte Ltd,
-        WISE - Wise Asia-Pacific Pte. Ltd.,
-        XFERS - Xfers Pte Ltd
+        HSBC_SG - HSBC Bank (Singapore)
       type: string
       enum:
-      - ANEXT
-      - ANZ
-      - BANK_OF_CHINA
-      - BNP
-      - CIMB
-      - CITI_NA
-      - CITI_SG
-      - DASH
       - DBS
-      - DEUTSCHE
-      - GLDB
-      - GRAB_PAY
-      - GXS
-      - HL
       - HSBC_CORP
       - HSBC_SG
-      - ICBOC
-      - ICICI
-      - JP_MORGAN
-      - LIQUID
-      - MALAYAN_BANKING
-      - MARIBANK
-      - MATCHMOVE
-      - MAYBANK
-      - MIZUHO
-      - MUFG
-      - NIUM
-      - OCBC
-      - RHB
-      - SBI
-      - SING_FINANCE
-      - SMBC
-      - STANDARD_CHARTERED
-      - TRUST
-      - UOB
-      - WISE
-      - XFERS
     FixedDepositPlacement:
       title: FixedDepositPlacement
       oneOf:
@@ -2939,6 +3002,7 @@ components:
       type: object
       required:
       - payoutIntentionId
+      - recipientRefId
       - sellAmount
       - sellCurrency
       - buyAmount
@@ -2949,6 +3013,8 @@ components:
       - expiresAt
       properties:
         payoutIntentionId:
+          type: string
+        recipientRefId:
           type: string
         sellAmount:
           type: number
