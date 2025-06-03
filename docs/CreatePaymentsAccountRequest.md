@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **user_id** | **str** |  | 
 **currency_code** | **str** |  | 
-**desired_bank_country** | **str** |  | 
 
 ## Example
 

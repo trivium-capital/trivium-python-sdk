@@ -85,14 +85,17 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json, text/plain
+ - **Accept**: application/json
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
-**400** | Invalid value, Invalid value for: path parameter userId, Invalid value for: query parameter limit, Invalid value for: query parameter offset, Invalid value for: query parameter transactionId |  -  |
+**400** |  |  -  |
+**401** | Invalid value for X-Api-Key or Authorization HTTP header |  -  |
+**404** |  |  -  |
+**502** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

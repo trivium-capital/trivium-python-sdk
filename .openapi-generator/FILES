@@ -6,8 +6,10 @@ docs/AccountType.md
 docs/Action.md
 docs/AdHocPayoutIntention.md
 docs/ApprovePayout.md
+docs/ApprovePayoutDeprecated.md
 docs/AssetClass.md
 docs/AssetClassProportion.md
+docs/BadGateway.md
 docs/BadRequest.md
 docs/Balance.md
 docs/Balances.md
@@ -117,6 +119,8 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_approve_payout_deprecated.py
+test/test_bad_gateway.py
 tox.ini
 trivium_python_sdk/__init__.py
 trivium_python_sdk/api/__init__.py
@@ -139,8 +143,10 @@ trivium_python_sdk/models/account_type.py
 trivium_python_sdk/models/action.py
 trivium_python_sdk/models/ad_hoc_payout_intention.py
 trivium_python_sdk/models/approve_payout.py
+trivium_python_sdk/models/approve_payout_deprecated.py
 trivium_python_sdk/models/asset_class.py
 trivium_python_sdk/models/asset_class_proportion.py
+trivium_python_sdk/models/bad_gateway.py
 trivium_python_sdk/models/bad_request.py
 trivium_python_sdk/models/balance.py
 trivium_python_sdk/models/balances.py

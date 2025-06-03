@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **payout_intention_id** | **str** |  | 
+**recipient_ref_id** | **str** |  | 
 **sell_amount** | **float** |  | 
 **sell_currency** | **str** |  | 
 **buy_amount** | **float** |  | 

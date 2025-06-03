@@ -17,29 +17,17 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from trivium_python_sdk.models.fast_participant import FastParticipant
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-class Fast(BaseModel):
+class BadGateway(BaseModel):
     """
-    Fast
+    BadGateway
     """ # noqa: E501
-    account_number: StrictStr = Field(alias="accountNumber")
-    recipient_name: StrictStr = Field(alias="recipientName")
-    bank: FastParticipant
-    reference: Optional[StrictStr] = None
-    type: StrictStr
-    __properties: ClassVar[List[str]] = ["accountNumber", "recipientName", "bank", "reference", "type"]
-
-    @field_validator('type')
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['Fast']):
-            raise ValueError("must be one of enum values ('Fast')")
-        return value
+    message: StrictStr
+    __properties: ClassVar[List[str]] = ["message"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -59,7 +47,7 @@ class Fast(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of Fast from a JSON string"""
+        """Create an instance of BadGateway from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -84,7 +72,7 @@ class Fast(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of Fast from a dict"""
+        """Create an instance of BadGateway from a dict"""
         if obj is None:
             return None
 
@@ -92,11 +80,7 @@ class Fast(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "accountNumber": obj.get("accountNumber"),
-            "recipientName": obj.get("recipientName"),
-            "bank": obj.get("bank"),
-            "reference": obj.get("reference"),
-            "type": obj.get("type")
+            "message": obj.get("message")
         })
         return _obj
 
