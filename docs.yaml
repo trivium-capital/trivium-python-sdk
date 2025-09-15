@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.8
+  version: 0.2.9
 paths:
   /api/v1/user/{userId}:
     get:
@@ -574,7 +574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2025-06-10'
+                redemptionDate: '2025-09-15'
         '400':
           description: Invalid value
           content:
@@ -1595,12 +1595,14 @@ paths:
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '87654321'
                   bankCountry: SG
+                  bankSwift: DBSSSGSG
                 - paymentType: Swift
                   currency: SGD
                   bankName: JPMORGAN CHASE BANK, N.A.
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
                   bankCountry: US
+                  bankSwift: CHASUS33XXX
                   routingCodeType1: BIC_SWIFT
                   routingCodeValue1: CHASUS33XXX
         '400':
@@ -1702,12 +1704,14 @@ paths:
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '87654321'
                   bankCountry: SG
+                  bankSwift: DBSSSGSG
                 - paymentType: Swift
                   currency: SGD
                   bankName: JPMORGAN CHASE BANK, N.A.
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
                   bankCountry: US
+                  bankSwift: CHASUS33XXX
                   routingCodeType1: BIC_SWIFT
                   routingCodeValue1: CHASUS33XXX
               - accountId: f7fde049-bbd6-4db7-9d0f-a28adbf4a138
@@ -1725,6 +1729,7 @@ paths:
                   bankAccountHolderName: My Company Pte. Ltd.
                   bankAccountNumber: '3333333'
                   bankCountry: US
+                  bankSwift: CHASUS33XXX
                   routingCodeType1: BIC_SWIFT
                   routingCodeValue1: CHASUS33XXX
         '400':
@@ -1828,6 +1833,7 @@ paths:
                     bankAccountHolderName: My Supplier Pte. Ltd.
                     bankAccountNumber: '87654321'
                     bankCountry: SG
+                    bankSwift: DBSSSGSG
                     routingCodeType1: BIC_SWIFT
                     routingCodeValue1: DBSSSGSG
         required: true
@@ -2080,6 +2086,7 @@ components:
       - bankAccountHolderName
       - bankAccountNumber
       - bankCountry
+      - bankSwift
       properties:
         paymentType:
           $ref: '#/components/schemas/PaymentType'
@@ -2092,6 +2099,8 @@ components:
         bankAccountNumber:
           type: string
         bankCountry:
+          type: string
+        bankSwift:
           type: string
         routingCodeType1:
           $ref: '#/components/schemas/RoutingCodeType'
