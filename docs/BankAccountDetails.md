@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **bank_account_holder_name** | **str** |  | 
 **bank_account_number** | **str** |  | 
 **bank_country** | **str** |  | 
+**bank_swift** | **str** |  | 
 **routing_code_type1** | [**RoutingCodeType**](RoutingCodeType.md) |  | [optional] 
 **routing_code_value1** | **str** |  | [optional] 
 **routing_code_type2** | [**RoutingCodeType**](RoutingCodeType.md) |  | [optional] 

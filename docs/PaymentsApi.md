@@ -393,7 +393,7 @@ configuration = trivium_python_sdk.Configuration(
 with trivium_python_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = trivium_python_sdk.PaymentsApi(api_client)
-    payout_intention = {"type":"AdHocPayoutIntention","fromAccountId":"52ac3a7a-dc33-4ceb-b641-1a885833735e","quote":{"sellCurrency":"USD","buyCurrency":"SGD","fixedSide":"Buy","amount":721.8,"recipientBankCountry":"SG","chargeType":"OURS"},"beneficiary":{"type":"CorporateBeneficiaryDetails","companyName":"My Supplier Pte. Ltd.","address":"1 Lorong Satu, Singapore 110111","city":"Singapore","country":"SG","postalCode":"456789"},"bankAccountDetails":{"paymentType":"Swift","currency":"USD","bankName":"DBS Ltd","bankAccountHolderName":"My Supplier Pte. Ltd.","bankAccountNumber":"87654321","bankCountry":"SG","routingCodeType1":"BIC_SWIFT","routingCodeValue1":"DBSSSGSG"}} # PayoutIntention | 
+    payout_intention = {"type":"AdHocPayoutIntention","fromAccountId":"52ac3a7a-dc33-4ceb-b641-1a885833735e","quote":{"sellCurrency":"USD","buyCurrency":"SGD","fixedSide":"Buy","amount":721.8,"recipientBankCountry":"SG","chargeType":"OURS"},"beneficiary":{"type":"CorporateBeneficiaryDetails","companyName":"My Supplier Pte. Ltd.","address":"1 Lorong Satu, Singapore 110111","city":"Singapore","country":"SG","postalCode":"456789"},"bankAccountDetails":{"paymentType":"Swift","currency":"USD","bankName":"DBS Ltd","bankAccountHolderName":"My Supplier Pte. Ltd.","bankAccountNumber":"87654321","bankCountry":"SG","bankSwift":"DBSSSGSG","routingCodeType1":"BIC_SWIFT","routingCodeValue1":"DBSSSGSG"}} # PayoutIntention | 
 
     try:
         api_response = api_instance.post_api_v1_payments_payout(payout_intention)
