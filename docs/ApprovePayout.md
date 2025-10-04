@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **recipient_ref_id** | **str** |  | 
 **purpose_of_payment** | [**PaymentPurpose**](PaymentPurpose.md) |  | 
 **unique_reference** | **str** |  | [optional] 
+**payment_reference** | **str** |  | [optional] 
 
 ## Example
 
