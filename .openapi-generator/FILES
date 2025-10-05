@@ -1,5 +1,4 @@
 .gitignore
-README.md
 docs/Account.md
 docs/AccountStatus.md
 docs/AccountType.md
@@ -115,7 +114,6 @@ docs/UserDetails.md
 docs/UserStatus.md
 docs/UserTransaction.md
 setup.cfg
-setup.py
 test-requirements.txt
 test/__init__.py
 tox.ini

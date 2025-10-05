@@ -30,3 +30,5 @@ git_push.sh
 trivium_python_sdk/rest.py
 pyproject.toml
 requirements.txt
+README.md
+setup.py
