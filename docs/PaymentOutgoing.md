@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **completed_at** | **datetime** |  | [optional] 
 **status** | [**TransactionStatus**](TransactionStatus.md) |  | 
+**unique_reference** | **str** |  | [optional] 
+**payment_reference** | **str** |  | [optional] 
 **type** | **str** |  | 
 
 ## Example
