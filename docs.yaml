@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: trivium-cash
-  version: 0.2.11
+  version: 0.2.12
 paths:
   /api/v1/user/{userId}:
     get:
@@ -574,7 +574,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RedemptionInfo'
               example:
-                redemptionDate: '2025-10-06'
+                redemptionDate: '2025-12-02'
         '400':
           description: Invalid value
           content:
@@ -2884,6 +2884,8 @@ components:
           format: date-time
         status:
           $ref: '#/components/schemas/TransactionStatus'
+        paymentReference:
+          type: string
         type:
           type: string
           const: PaymentIncoming
