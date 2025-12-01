@@ -14,8 +14,8 @@ Name | Type | Description | Notes
 **type** | **str** |  | 
 **created_at** | **datetime** |  | 
 **completed_at** | **datetime** |  | [optional] 
-**unique_reference** | **str** |  | [optional] 
 **payment_reference** | **str** |  | [optional] 
+**unique_reference** | **str** |  | [optional] 
 
 ## Example
 
